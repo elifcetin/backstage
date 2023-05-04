@@ -1,0 +1,327 @@
+#########################################################################
+# Backstage catalog for NCI
+#
+#########################################################################
+
+
+
+#########################################################################
+# Component services
+#
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-auth
+  description: Replace me with a real description.
+  tags:
+    - nci
+  links:
+    - url: https://docs.nci.today/components/nci-service-auth/
+      title: NCI Today page
+  # annotations:
+  #   docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-06+NCI+service+auth
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  # dependsOn: ['component:nci-service-ingress',
+  #             'component:nci-service-postgres',
+  #             'component:nci-service-redis',
+  #             'component:nci-service-elasticsearch',
+  #             'component:nci-service-licensing']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-ingress
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-07+NCI+service+ingress
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-elasticsearch
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-08+NCI+service+elasticsearch
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['resource:elasticsearch',
+              'component:nci-service-ingress',
+              'component:nci-service-monitoring']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-kafka
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-09+NCI+service+kafka
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-zookeeper',
+              'component:nci-service-monitoring']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-redis
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-10+NCI+service+redis
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-monitoring']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-postgres
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-11+NCI+service+postgres
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-monitoring',
+              'resource:elasticsearch']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-licensing
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-12+NCI+service+licensing
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-auth']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-zookeeper
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-13+NCI+service+zookeeper
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-monitoring']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-snmp
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-14+NCI+Service+SNMP
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-kafka',
+              'component:nci-service-redis',
+              'component:nci-service-monitoring',
+              'component:nci-service-auth',
+              'component:nci-service-logging',
+              'component:nci-service-postgres']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-rabbitmq
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-15+NCI+service+rabbitmq
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-auth']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-minio
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-16+NCI+service+minio
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-auth']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-vertica
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-11+NCI+service+postgres
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-kafka',
+              'component:nci-service-logging',
+              'component:nci-service-monitoring',
+              'resource:vertica']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-vertica
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-11+NCI+service+postgres
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-kafka',
+              'component:nci-service-logging',
+              'component:nci-service-monitoring',
+              'resource:vertica']
+
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-yellowfin
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-18+NCI+service+yellowfin
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-postgres']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-pentaho
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-19+NCI+service+pentaho
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-ingress',
+              'component:nci-service-postgres']
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nci-service-email
+  description: Replace me with a real description.
+  tags:
+    - nci
+  annotations:
+    docs: https://conf1.ds.jdsu.net/wiki/display/NCIR/4.1+-+08-20+NCI+service+email
+spec:
+  type: service
+  lifecycle: production
+  owner: nci-team
+  dependsOn: ['component:nci-service-email']
+
+
+#########################################################################
+# Resources
+#
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: elasticsearch
+  description: Replace me with a real description.
+spec:
+  type: database
+  owner: nci-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: vertica
+  description: Replace me with a real description.
+spec:
+  type: database
+  owner: nci-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: postgres
+  description: Replace me with a real description.
+spec:
+  type: database
+  owner: nci-team
